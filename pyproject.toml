@@ -1,0 +1,11 @@
+[project]
+name = "comfyui-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi-versioning>=0.10.0",
+    "fastapi[standard]>=0.136.1",
+    "requests>=2.33.1",
+]

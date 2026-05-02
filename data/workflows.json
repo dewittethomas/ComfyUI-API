@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ltx-2.3-ia2v",
+    "model_id": "ltx-2.3",
+    "workflow_file": "data/workflows/ltx-2.3-ia2v.json",
+    "accepts": {
+      "image": true,
+      "audio": true,
+      "prompt": true
+    },
+    "settings_nodes": {
+        "fps": {
+            "class_type": "CreateVideo",
+            "key": "fps"
+        },
+        "width": {
+            "class_type": "ResizeImageMaskNode",
+            "key": "resize_type.width"
+        },
+        "height": {
+            "class_type": "ResizeImageMaskNode",
+            "key": "resize_type.height"
+        },
+        "duration": {
+            "class_type": "PrimitiveInt",
+            "key": "value"
+        }
+    },
+    "input_nodes": {
+        "image": {
+            "class_type": "Base64ToImage",
+            "key": "base64"
+        },
+        "audio": {
+            "class_type": "Base64ToAudio",
+            "key": "base64"
+        },
+        "positive_prompt": {
+            "class_type": "TextGenerateLTX2Prompt",
+            "key": "prompt"
+        },
+        "negative_prompt": {
+            "class_type": "CLIPTextEncode",
+            "key": "text"
+        }
+    },
+    "output_nodes": {
+      "video": "SaveVideo",
+      "last_frame": "GetVideoComponents"
+    }
+  }
+]
