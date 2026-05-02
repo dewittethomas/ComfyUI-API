@@ -1,8 +1,9 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 import time
 
 from models.prompt import PromptRequest
+from models.execution import Execution
 
 class Job(BaseModel):
     id: str
@@ -10,11 +11,8 @@ class Job(BaseModel):
 
     request: PromptRequest  
 
-    status: str = 'queued'
-    progress: float = 0.0
-    current_node: Optional[str] = None
+    status: str = "queued"
 
-    result: Optional[dict] = None
-    error: Optional[str] = None
+    executions: List[Execution] = []
 
     created: int = int(time.time())
