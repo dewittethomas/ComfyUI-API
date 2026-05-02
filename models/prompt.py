@@ -10,6 +10,9 @@ class PromptRequest(BaseModel):
     image: Optional[str] = None
     audio: Optional[str] = None
 
+    custom_image: bool = False
+    custom_audio: bool = False
+
     fps: Optional[int] = None
     width: Optional[int] = None
     height: Optional[int] = None

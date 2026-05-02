@@ -14,6 +14,8 @@ from interfaces.job_repository import JobRepository
 from .job_service import JobService
 from repositories.in_memory_job_repository import InMemoryJobRepository
 
+from .prompt_builder import PromptBuilder
+
 # Singleton Instances
 _comfy_client: ComfyClient | None = None
 _comfy_session: ComfySession | None = None
@@ -68,6 +70,18 @@ def get_job_service():
     global _job_service
 
     if _job_service is None:
-        _job_service = JobService(get_job_repository())
+        _job_service = JobService(
+            get_job_repository(),
+            get_workflow_service(),
+            get_comfy_client(),
+            get_comfy_session(),
+            get_prompt_builder()
+        )
 
     return _job_service
+
+# Prompt Builder
+
+def get_prompt_builder():
+    return PromptBuilder()
+
