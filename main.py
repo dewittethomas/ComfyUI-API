@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi_versioning import VersionedFastAPI, version
+from fastapi_versioning import VersionedFastAPI
 from routers import models, workflows, jobs
 
 app = FastAPI()

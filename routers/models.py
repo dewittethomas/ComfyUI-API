@@ -5,16 +5,22 @@ from typing import Annotated
 from services.model_service import ModelService
 from services.dependencies import get_model_service
 
+from responses import ModelResponse, ListResponse
+
 router = APIRouter()
 
 ModelServiceDep = Annotated[ModelService, Depends(get_model_service)]
 
-@router.get("/models", responses={
-    200: {"description": "List of available models"}
-})
+@router.get(
+    "/models", 
+    response_model=ListResponse[ModelResponse],
+    responses={
+        200: {"description": "List of available models"}
+    }
+)
 @router.get("/models")
 @version(1)
-async def list_models_route(service: ModelServiceDep):
+async def list_models(service: ModelServiceDep):
     models = service.list_models()
 
     return {
@@ -22,13 +28,17 @@ async def list_models_route(service: ModelServiceDep):
         "data": [m.model_dump() for m in models]
     }
 
-@router.get("/models/{model_id}", responses={
-    200: {"description": "Model found"},
-    404: {"description": "Model not found"}
-})
+@router.get(
+    "/models/{model_id}", 
+    response_model=ModelResponse,
+    responses={
+        200: {"description": "Model found"},
+        404: {"description": "Model not found"}
+    }
+)
 @router.get("/models/{model_id}")
 @version(1)
-async def get_model_by_id_route(
+async def get_model_by_id(
     model_id: str,
     service: ModelServiceDep
 ):

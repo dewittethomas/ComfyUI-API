@@ -25,8 +25,6 @@ class WorkflowInputNodes(BaseModel):
     audio: Optional[WorkflowInputNode] = None
     positive_prompt: Optional[WorkflowInputNode] = None
     negative_prompt: Optional[WorkflowInputNode] = None
-    custom_image: Optional[WorkflowInputNode] = None
-    custom_audio: Optional[WorkflowInputNode] = None
 
 class WorkflowOutputNodes(BaseModel):
     video: Optional[str] = None
@@ -36,7 +34,11 @@ class Workflow(BaseModel):
     id: str
     model_id: str
     workflow_file: str
+
     accepts: WorkflowAccepts
     settings_nodes: WorkflowSettingsNodes
     input_nodes: WorkflowInputNodes
     output_nodes: WorkflowOutputNodes
+    
+    custom_image: bool = False
+    custom_audio: bool = False
