@@ -11,6 +11,14 @@ router = APIRouter()
 
 JobServiceDep = Annotated[JobService, Depends(get_job_service)]
 
+@router.get("/jobs")
+def list_jobs(service: JobServiceDep):
+    jobs = service.get_all()
+
+    return {
+        "object": "list",
+        "data": [j.model_dump() for j in jobs]
+    }
 
 @router.post(
     "/jobs",
@@ -26,14 +34,4 @@ async def create_job(
     return {
         "object": "job",
         "data": job.model_dump()
-    }
-
-
-@router.get("/jobs")
-def list_jobs(service: JobServiceDep):
-    jobs = service.get_all()
-
-    return {
-        "object": "list",
-        "data": [j.model_dump() for j in jobs]
     }

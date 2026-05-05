@@ -1,7 +1,7 @@
-from pydantic import BaseModel
-from typing import Optional, List
+from pydantic import BaseModel, Field
 import time
 
+from models.job_status import JobStatus
 from models.prompt import PromptRequest
 from models.execution import Execution
 
@@ -9,10 +9,10 @@ class Job(BaseModel):
     id: str
     workflow_id: str
 
-    request: PromptRequest  
+    request: PromptRequest
 
-    status: str = "queued"
+    status: JobStatus = JobStatus.queued
 
-    executions: List[Execution] = []
+    executions: list[Execution] = Field(default_factory=list)
 
     created: int = int(time.time())

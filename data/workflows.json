@@ -4,15 +4,11 @@
     "model_id": "ltx-2.3",
     "workflow_file": "data/workflows/ltx-2.3-ia2v.json",
     "accepts": {
+      "prompt": true,
       "image": true,
-      "audio": true,
-      "prompt": true
+      "audio": true
     },
     "settings_nodes": {
-        "fps": {
-            "class_type": "CreateVideo",
-            "key": "fps"
-        },
         "width": {
             "class_type": "ResizeImageMaskNode",
             "key": "resize_type.width"
@@ -24,6 +20,10 @@
         "duration": {
             "class_type": "PrimitiveInt",
             "key": "value"
+        },
+        "fps": {
+            "class_type": "CreateVideo",
+            "key": "fps"
         }
     },
     "input_nodes": {
@@ -47,6 +47,39 @@
     "output_nodes": {
       "video": "SaveVideo",
       "last_frame": "GetVideoComponents"
+    }
+  },
+  {
+    "id": "sd-3.5-t2i",
+    "model_id": "sd-3.5",
+    "workflow_file": "data/workflows/sd-3.5-t2i.json",
+    "accepts": {
+        "image": false,
+        "audio": false,
+        "prompt": true
+    },
+    "settings_nodes": {
+        "width": {
+            "class_type": "EmptyLatentImage",
+            "key": "width"
+        },
+        "height": {
+            "class_type": "EmptyLatentImage",
+            "key": "height"
+        }
+    },
+    "input_nodes": {
+        "positive_prompt": {
+            "class_type": "CLIPTextEncode",
+            "key": "text"
+        },
+        "negative_prompt": {
+            "class_type": "CLIPTextEncode",
+            "key": "text"
+        }
+    },
+    "output_nodes": {
+        "image": "PreviewImage"
     }
   }
 ]

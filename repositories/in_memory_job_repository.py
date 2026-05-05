@@ -21,3 +21,10 @@ class InMemoryJobRepository(JobRepository):
 
     def delete(self, job_id: str) -> None:
         self._jobs.pop(job_id, None)
+
+    def find_by_prompt_id(self, prompt_id: str) -> Optional[Job]:
+        for job in self._jobs.values():
+            for execution in job.executions:
+                if execution.prompt_id == prompt_id:
+                    return job
+        return None

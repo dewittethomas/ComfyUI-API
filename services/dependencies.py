@@ -1,6 +1,7 @@
 from core.settings import get_settings
 
 from clients.comfy_client import ComfyClient
+from clients.comfy_ws_client import ComfyWebSocketClient
 
 from clients.comfy_session import ComfySession
 
@@ -81,7 +82,5 @@ def get_job_service():
     return _job_service
 
 # Prompt Builder
-
 def get_prompt_builder():
     return PromptBuilder()
-

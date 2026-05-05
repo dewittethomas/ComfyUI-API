@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Optional
 
 from models.job import Job
 
@@ -23,4 +23,8 @@ class JobRepository(ABC):
 
     @abstractmethod
     def delete(self, job_id: str) -> None:
+        pass
+
+    @abstractmethod
+    def find_by_prompt_id(self, prompt_id: str) -> Optional[Job]:
         pass

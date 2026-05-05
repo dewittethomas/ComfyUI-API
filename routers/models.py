@@ -18,7 +18,6 @@ ModelServiceDep = Annotated[ModelService, Depends(get_model_service)]
         200: {"description": "List of available models"}
     }
 )
-@router.get("/models")
 @version(1)
 async def list_models(service: ModelServiceDep):
     models = service.list_models()
@@ -36,7 +35,6 @@ async def list_models(service: ModelServiceDep):
         404: {"description": "Model not found"}
     }
 )
-@router.get("/models/{model_id}")
 @version(1)
 async def get_model_by_id(
     model_id: str,

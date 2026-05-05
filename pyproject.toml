@@ -8,4 +8,5 @@ dependencies = [
     "fastapi-versioning>=0.10.0",
     "fastapi[standard]>=0.136.1",
     "requests>=2.33.1",
+    "websockets>=14.0",
 ]

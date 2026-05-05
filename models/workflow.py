@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Dict, Optional
 
 class WorkflowAccepts(BaseModel):
     image: bool = False
@@ -26,10 +26,6 @@ class WorkflowInputNodes(BaseModel):
     positive_prompt: Optional[WorkflowInputNode] = None
     negative_prompt: Optional[WorkflowInputNode] = None
 
-class WorkflowOutputNodes(BaseModel):
-    video: Optional[str] = None
-    last_frame: Optional[str] = None
-
 class Workflow(BaseModel):
     id: str
     model_id: str
@@ -38,7 +34,7 @@ class Workflow(BaseModel):
     accepts: WorkflowAccepts
     settings_nodes: WorkflowSettingsNodes
     input_nodes: WorkflowInputNodes
-    output_nodes: WorkflowOutputNodes
+    output_nodes: Dict[str, str]
     
     custom_image: bool = False
     custom_audio: bool = False

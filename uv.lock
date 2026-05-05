@@ -149,6 +149,7 @@ dependencies = [
     { name = "fastapi", extra = ["standard"] },
     { name = "fastapi-versioning" },
     { name = "requests" },
+    { name = "websockets" },
 ]
 
 [package.metadata]
@@ -156,6 +157,7 @@ requires-dist = [
     { name = "fastapi", extras = ["standard"], specifier = ">=0.136.1" },
     { name = "fastapi-versioning", specifier = ">=0.10.0" },
     { name = "requests", specifier = ">=2.33.1" },
+    { name = "websockets", specifier = ">=14.0" },
 ]
 
 [[package]]
